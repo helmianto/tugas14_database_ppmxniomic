@@ -1,0 +1,14 @@
+CREATE TABLE ipk_mahasiswa (
+nama_dan_nip VARCHAR(50),
+nilai_ipk FLOAT
+);
+
+DELIMITER $$
+CREATE TRIGGER before_nilai_mahasiswa_insert
+BEFORE INSERT ON nilai_mahasiswa
+FOR EACH ROW
+BEGIN
+INSERT INTO ipk_mahasiswa VALUES
+(CONCAT(UPPER(NEW.nama),' (', NEW.nim  ,')', ROUND(((NEW.semester_1 + NEW.semester_2 + NEW.semester_3)/3),2) );
+END$$
+DELIMITER ;  
